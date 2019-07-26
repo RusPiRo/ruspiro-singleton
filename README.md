@@ -43,4 +43,4 @@ fn main() {
 ```
 
 ## License
-This crate is licensed with the Appache License 2.0
+Licensed under Apache License, Version 2.0, ([LICENSE](LICENSE) or http://www.apache.org/licenses/LICENSE-2.0)
