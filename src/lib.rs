@@ -36,18 +36,16 @@
 //! }
 //! 
 //! # fn main () {
-//!     let maybe_counter = MY_SINGLETON.take_for( |singleton| {
+//!     let counter = MY_SINGLETON.take_for( |singleton| {
 //!         println!("secure access to the singleton");
-//!         // do something with the singleton, it is mutable inside 'lock_for'
+//!         // do something with the singleton, it is mutable inside 'take_for'
 //!         let c = singleton.add_count(1);
-//!         // and return any value, the return value of lock_for is inferred from the return
-//!         // value of the closure given to this function
-//!         Ok(c)
+//!         // and return any value, the return value of take_for is inferred from the return
+//!         // value of the closure given to this function.
+//!         c
 //!     });
 //! 
-//!     if let Ok(counter) = maybe_counter {
-//!         println!("successfull {}", counter);
-//!     }
+//!     println!("successfull {}", counter);
 //! # }
 //! ```
 //! 
