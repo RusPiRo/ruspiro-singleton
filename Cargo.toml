@@ -13,6 +13,6 @@ edition = "2018"
 [lib]
 
 [dependencies]
-ruspiro-lock = { git = "https://github.com/RusPiRo/ruspiro-lock/tree/v0.0.1" }
+ruspiro-lock = { git = "https://github.com/RusPiRo/ruspiro-lock", tag ="v0.0.1" }
 
 [features]
