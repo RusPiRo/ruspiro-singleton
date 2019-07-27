@@ -6,7 +6,7 @@ This crate provides an easy to use singleton pattern that is safe to be used acr
 To use this crate simply add the dependency to your ``Cargo.toml`` file:
 ```
 [dependencies]
-ruspiro-singleton = { git = 'https://github.com/RusPiRo/ruspiro-singleton' }
+ruspiro-singleton = { git = 'https://github.com/RusPiRo/ruspiro-singleton/tree/v0.0.1' }
 ```
 
 Once done on any rust file you can define a static variable as singleton of any type for safe cross core access like so:
@@ -34,8 +34,7 @@ fn main() {
         d.count += 10;
     });
 
-    // you may also return a value from the singleton to work with it outside the safe singleton access
-    // however, this only works for Copy semantics. Move semantics are not allowed and the compiler will complain.
+    // you may also return a value from the singleton to work with it after the safe singleton access
     let _current = DEMO.take_for(|d| {
         d.count
     });
