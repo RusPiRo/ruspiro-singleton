@@ -6,7 +6,7 @@ This crate provides an easy to use singleton pattern that is safe to be used acr
 To use this crate simply add the dependency to your ``Cargo.toml`` file:
 ```
 [dependencies]
-ruspiro-singleton = { git = "https://github.com/RusPiRo/ruspiro-singleton", tag = "v0.0.1" }
+ruspiro-singleton = "0.0.2"
 ```
 
 Once done on any rust file you can define a static variable as singleton of any type for safe cross core access like so:

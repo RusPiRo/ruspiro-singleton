@@ -4,10 +4,11 @@
  * Author: André Borrmann 
  * License: Apache License 2.0
  **********************************************************************************************************************/
-#![doc(html_root_url = "https://docs.rs/ruspiro-singleton/0.0.1")]
+#![doc(html_root_url = "https://docs.rs/ruspiro-singleton/0.0.2")]
 #![no_std]
 
-//! # Simgleton implementation
+//! # Singleton pattern implementation
+//! 
 //! Provide a cross core synchronisation safe singleton implementation pattern
 //! 
 //! # Example
@@ -63,9 +64,9 @@ pub struct Singleton<T> {
 unsafe impl<T> Sync for Singleton<T> { }
 
 impl<T> Singleton<T> {
-    /// Create a new singleton instance to be used in a static variable. If the singleton intance to be created
-    /// does not contain only const fn constructor the singleton may be further wrapped by [lazy_static!] available as 
-    /// external crate from crates.io
+    /// Create a new singleton instance to be used in a static variable. Only ``const fn`` constructors are allows here.
+    /// If this is not sufficient the singleton may be further wrapped by a ``lazy_static!`` available as 
+    /// external crate from [crates.io](https://crates.io/crates/lazy_static)
     pub const fn new(data: T) -> Singleton<T> {
         Singleton {
             inner: UnsafeCell::new(data),

@@ -1,18 +1,19 @@
 [package]
 name = "ruspiro-singleton"
 authors = ["André Borrmann <pspwizard@gmx.de>"]
-version = "0.0.1" # remember to update html_root_url
-description = ""
-license = "LICENSE"
-repository = "https://github.com/RusPiRo/ruspiro-singleton/tree/v0.0.1"
+version = "0.0.2" # remember to update html_root_url
+description = "The crates provides a simple singleton pattern"
+license = "Appache-2.0"
+repository = "https://github.com/RusPiRo/ruspiro-singleton/tree/v0.0.2"
+documentation = "https://docs.rs/ruspiro-singleton/0.0.2"
 readme = "README.md"
-keywords = ["ruspiro", "singleton", "raspberry-pi"]
-categories = ["no_std"]
+keywords = ["RusPiRo", "singleton", "raspberrypi"]
+categories = ["no-std", "embedded"]
 edition = "2018"
 
 [lib]
 
 [dependencies]
-ruspiro-lock = { git = "https://github.com/RusPiRo/ruspiro-lock", tag ="v0.0.1" }
+ruspiro-lock = "0.0.2"
 
 [features]
