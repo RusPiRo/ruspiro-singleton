@@ -1,12 +1,18 @@
 # RusPiRo Singleton crate
+
 This crate provides an easy to use singleton pattern that is safe to be used across cores.
+
+[![Travis-CI Status](https://api.travis-ci.org/RusPiRo/ruspiro-singleton.svg?branch=master)](https://travis-ci.org/RusPiRo/ruspiro-singleton)
+[![Latest Version](https://img.shields.io/crates/v/ruspiro-singleton.svg)](https://crates.io/crates/ruspiro-singleton)
+[![Documentation](https://docs.rs/ruspiro-singleton/badge.svg)](https://docs.rs/ruspiro-singleton)
+[![License](https://img.shields.io/crates/l/ruspiro-singleton.svg)](https://github.com/RusPiRo/ruspiro-singleton#license)
 
 ## Usage
 
 To use this crate simply add the dependency to your ``Cargo.toml`` file:
 ```
 [dependencies]
-ruspiro-singleton = "0.0.2"
+ruspiro-singleton = "0.1.0"
 ```
 
 Once done on any rust file you can define a static variable as singleton of any type for safe cross core access like so:

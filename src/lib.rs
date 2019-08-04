@@ -4,7 +4,7 @@
  * Author: André Borrmann 
  * License: Apache License 2.0
  **********************************************************************************************************************/
-#![doc(html_root_url = "https://docs.rs/ruspiro-singleton/0.0.2")]
+#![doc(html_root_url = "https://docs.rs/ruspiro-singleton/0.1.0")]
 #![no_std]
 
 //! # Singleton pattern implementation
