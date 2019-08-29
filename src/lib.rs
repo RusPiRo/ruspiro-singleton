@@ -4,7 +4,7 @@
  * Author: André Borrmann 
  * License: Apache License 2.0
  **********************************************************************************************************************/
-#![doc(html_root_url = "https://docs.rs/ruspiro-singleton/0.2.0")]
+#![doc(html_root_url = "https://docs.rs/ruspiro-singleton/0.2.1")]
 #![no_std]
 #![feature(asm)]
 
@@ -65,7 +65,6 @@
 //! 
 use core::cell::RefCell;
 use ruspiro_lock::Spinlock;
-use ruspiro_interrupt_core::{disable_interrupts, re_enable_interrupts};
 
 /// The Singleton wrapper stores any type
 pub struct Singleton<T: 'static> {
@@ -104,18 +103,15 @@ impl<T: 'static> Singleton<T> {
         where F: FnOnce(&mut T) -> R 
     {
             // to ensure atomic access to the singleton wrapped resource we aquire a lock before allowing to access
-            // the same            
-            // deactivate interrupts while locking this instance for access
-            // this ensures thee are now deadlocks possible when a lock is interrupted and the handler
-            // tries to aquire the same lock
+            // the same. While the lock is aquired interrupts are disabled. This ensures there are now deadlocks 
+            // possible when a lock is interrupted and the handler tries to aquire the same lock
             self.lock.aquire();
-            disable_interrupts();
             
             let r = f( &mut *self.inner.borrow_mut() );
             
             // after processing we can release the lock so other cores can access the singleton as well
+            // this also re-enables interrupts
             self.lock.release();
-            re_enable_interrupts();
             r
     }
 
