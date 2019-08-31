@@ -4,7 +4,7 @@
  * Author: André Borrmann 
  * License: Apache License 2.0
  **********************************************************************************************************************/
-#![doc(html_root_url = "https://docs.rs/ruspiro-singleton/0.2.1")]
+#![doc(html_root_url = "https://docs.rs/ruspiro-singleton/0.2.2")]
 #![no_std]
 #![feature(asm)]
 
@@ -63,18 +63,21 @@
 //! }
 //! ```
 //! 
-use core::cell::RefCell;
+use core::cell::UnsafeCell;
 use ruspiro_lock::Spinlock;
 
 /// The Singleton wrapper stores any type
 pub struct Singleton<T: 'static> {
-    inner: RefCell<T>,
+    inner: UnsafeCell<T>,
     lock: Spinlock,
 }
 
 // The Singleton need to implement Sync to ensure cross core sync compile check mechanisms
 #[doc(hidden)]
 unsafe impl<T> Sync for Singleton<T> { }
+
+#[doc(hidden)]
+unsafe impl<T> Send for Singleton<T> { }
 
 impl<T: 'static> Singleton<T> {
     
@@ -83,7 +86,7 @@ impl<T: 'static> Singleton<T> {
     /// external crate from [crates.io](https://crates.io/crates/lazy_static)
     pub const fn new(data: T) -> Singleton<T> {
         Singleton {
-            inner: RefCell::new(data),
+            inner: UnsafeCell::new(data),
             lock: Spinlock::new(),
         }
     }
@@ -107,7 +110,7 @@ impl<T: 'static> Singleton<T> {
             // possible when a lock is interrupted and the handler tries to aquire the same lock
             self.lock.aquire();
             
-            let r = f( &mut *self.inner.borrow_mut() );
+            let r = f( unsafe { &mut *self.inner.get() } );
             
             // after processing we can release the lock so other cores can access the singleton as well
             // this also re-enables interrupts
@@ -131,6 +134,6 @@ impl<T: 'static> Singleton<T> {
     pub fn use_for<F, R>(&self, f: F) -> R
         where F: FnOnce(&T) -> R
     {
-            f( & *self.inner.borrow() )
+            f( unsafe { & *self.inner.get() } )
     }
 }
