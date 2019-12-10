@@ -4,7 +4,7 @@
  * Author: André Borrmann 
  * License: Apache License 2.0
  **********************************************************************************************************************/
-#![doc(html_root_url = "https://docs.rs/ruspiro-singleton/0.2.2")]
+#![doc(html_root_url = "https://docs.rs/ruspiro-singleton/0.3.0")]
 #![no_std]
 #![feature(asm)]
 
@@ -14,15 +14,17 @@
 //! 
 //! # Example
 //! ```
-//! static MY_SINGLETON: Singleton<MySingleton> = Singleton::new(MySingleton::new(0));
+//! use ruspiro_singleton::*;
 //! 
-//! struct MySingleton {
+//! static FOO: Singleton<Foo> = Singleton::new(Foo::new(0));
+//! 
+//! struct Foo {
 //!     count: u32,
 //! }
 //! 
-//! impl MySingleton {
-//!     pub fn new(initial_count: u32) -> Self {
-//!         MySingleton {
+//! impl Foo {
+//!     pub const fn new(initial_count: u32) -> Self {
+//!         Foo {
 //!             count: initial_count,
 //!         }
 //!     }
@@ -37,11 +39,11 @@
 //!     }
 //! }
 //! 
-//! fn some_function () {
-//!     let counter = MY_SINGLETON.take_for( |singleton| {
+//! fn main () {
+//!     let counter = FOO.take_for( |foo| {
 //!         println!("secure access to the singleton");
 //!         // do something with the singleton, it is mutable inside 'take_for'
-//!         let c = singleton.add_count(1);
+//!         let c = foo.add_count(1);
 //!         // and return any value, the return value of take_for is inferred from the return
 //!         // value of the closure given to this function.
 //!         c
@@ -54,9 +56,26 @@
 //! In case only immutable access to the contents of the singleton is required the ``use_for`` function 
 //! can be used.
 //! ```
-//! fn some_other_function() {
-//!     let counter = MY_SINGLETON.use_for( |s| {
-//!             s.count()
+//! # use ruspiro_singleton::*;
+//! # static FOO: Singleton<Foo> = Singleton::new(Foo::new(0));
+//! # struct Foo {
+//! #     count: u32,
+//! # }
+//! # impl Foo {
+//! #     pub const fn new(initial_count: u32) -> Self {
+//! #         Foo {
+//! #             count: initial_count,
+//! #         }
+//! #     }
+//! # 
+//! #     pub fn count(&self) -> u32 {
+//! #         self.count    
+//! #     }
+//! # }
+//! 
+//! fn main () {
+//!     let counter = FOO.use_for( |foo| {
+//!             foo.count()
 //!         });
 //! 
 //!     println!("current counter: {}", counter);
@@ -96,10 +115,12 @@ impl<T: 'static> Singleton<T> {
     /// 
     /// # Example
     /// ```
-    /// # fn doc() {
-    ///     MY_SINGLETON.take_for(|my| {
-    ///         // do something with [my]
-    ///         my.any_mutable_function();
+    /// # use ruspiro_singleton::*;
+    /// # static FOO: Singleton<u32> = Singleton::new(0);
+    /// # fn main() {
+    ///     FOO.take_for(|foo| {
+    ///         // do something mutable with [foo]
+    ///     });
     /// # }
     /// ```
     pub fn take_for<F, R>(&self, f: F) -> R
@@ -124,10 +145,11 @@ impl<T: 'static> Singleton<T> {
     /// 
     /// # Example
     /// ```
-    /// # fn doc() {
-    ///     MY_SINGLETON.use_for(|my| {
-    ///         // do something with [my]
-    ///         let _ = my.any_immutable_function();
+    /// # use ruspiro_singleton::*;
+    /// # static FOO: Singleton<u32> = Singleton::new(0);
+    /// # fn main() {
+    ///     FOO.use_for(|foo| {
+    ///         // do something immutable with [foo]
     ///     });
     /// # }
     /// ```
