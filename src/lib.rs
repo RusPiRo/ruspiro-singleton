@@ -6,7 +6,7 @@
  **********************************************************************************************************************/
 #![doc(html_root_url = "https://docs.rs/ruspiro-singleton/0.3.0")]
 #![no_std]
-#![feature(asm)]
+#![feature(llvm_asm)]
 
 //! # Singleton pattern implementation
 //!
