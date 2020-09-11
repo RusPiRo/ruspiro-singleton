@@ -4,10 +4,8 @@
  * Author: André Borrmann
  * License: Apache License 2.0
  **********************************************************************************************************************/
-#![doc(html_root_url = "https://docs.rs/ruspiro-singleton/0.3.0")]
+#![doc(html_root_url = "https://docs.rs/ruspiro-singleton/0.3.1")]
 #![no_std]
-#![feature(asm)]
-
 //! # Singleton pattern implementation
 //!
 //! Provide a cross core synchronisation safe singleton implementation pattern

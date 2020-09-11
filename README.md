@@ -10,13 +10,15 @@ This crate provides an easy to use singleton pattern that is safe to be used acr
 ## Usage
 
 To use this crate simply add the dependency to your ``Cargo.toml`` file:
-```
+
+```toml
 [dependencies]
 ruspiro-singleton = "0.3"
 ```
 
 Once done on any rust file you can define a static variable as singleton of any type for safe cross core access like so:
-```
+
+```rust
 // define the static variable
 static DEMO:Singleton<Demo> = Singleton::new(Demo::new());
 
@@ -48,7 +50,8 @@ fn main() {
 ```
 
 If the singleton does only require ``read only`` access a non-blocking function could be used:
-```
+
+```rust
 fn main() {
     DEMO.use_for(|d| {
         // d is available with immutable access only in this scenario
@@ -56,6 +59,7 @@ fn main() {
     });
 }
 ```
+
 ## Limitation
 The current version of the implementation does not allow *lazy* initialization. Only ``const fn`` functions can be used to initialize the structure instance that should be wrapped by the ``Singleton``.
 
