@@ -47,4 +47,5 @@ matrix:
       install:
         # if we not build a PR we remove the patch of the dependencies to their github repo's
         - 'if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then sed -i "s/\[patch.crates-io\].*/ /g" Cargo.toml; fi'
+        - cat Cargo.toml
       script: cargo test --doc
