@@ -41,10 +41,10 @@ matrix:
       install:
         # if we not build a PR we remove the patch of the dependencies to their github repo's
         - 'if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then sed -i "s/[patch.crates-io].*//g" Cargo.toml'
-      script: cargo test --tests --features ruspiro_pi3
+      script: cargo test --tests
 
     - name: "doc tests"
       install:
         # if we not build a PR we remove the patch of the dependencies to their github repo's
         - 'if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then sed -i "s/[patch.crates-io].*//g" Cargo.toml'
-      script: cargo test --doc --features ruspiro_pi3
+      script: cargo test --doc

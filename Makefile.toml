@@ -31,7 +31,7 @@ command = "cargo"
 args = ["xbuild", "--target", "${BUILD_TARGET}", "--release", "--features", "${FEATURES}"]
 
 [tasks.pi3]
-env = { FEATURES = "ruspiro_pi3" }
+env = { FEATURES = "" }
 run_task = [
     { name = "xbuild" }
 ]
