@@ -22,7 +22,7 @@ matrix:
         - rustup component add rust-src
         - rustup component add llvm-tools-preview
         # if we not build a PR we remove the patch of the dependencies to their github repo's
-        - 'if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then sed -i "s/[patch.crates-io].*//g" Cargo.toml'
+        - 'if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then sed -i "s/\[patch.crates-io\].*/ /g" Cargo.toml'
       script: cargo make --profile a64-travis pi3
 
     - name: "build 32Bit"
@@ -34,17 +34,17 @@ matrix:
         - rustup component add rust-src
         - rustup component add llvm-tools-preview
         # if we not build a PR we remove the patch of the dependencies to their github repo's
-        - 'if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then sed -i "s/[patch.crates-io].*//g" Cargo.toml'
+        - 'if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then sed -i "s/\[patch.crates-io\].*/ /g" Cargo.toml'
       script: cargo make --profile a32 pi3
 
     - name: "unit tests"
       install:
         # if we not build a PR we remove the patch of the dependencies to their github repo's
-        - 'if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then sed -i "s/[patch.crates-io].*//g" Cargo.toml'
+        - 'if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then sed -i "s/\[patch.crates-io\].*/ /g" Cargo.toml'
       script: cargo test --tests
 
     - name: "doc tests"
       install:
         # if we not build a PR we remove the patch of the dependencies to their github repo's
-        - 'if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then sed -i "s/[patch.crates-io].*//g" Cargo.toml'
+        - 'if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then sed -i "s/\[patch.crates-io\].*/ /g" Cargo.toml'
       script: cargo test --doc
