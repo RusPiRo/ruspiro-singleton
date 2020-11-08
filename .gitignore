@@ -3,3 +3,5 @@
 **/release
 .vscode
 *.lock
+*.log
+*.ld
