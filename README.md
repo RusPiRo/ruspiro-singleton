@@ -90,10 +90,6 @@ fn main() {
 }
 ```
 
-## Limitation
-
-The current version of the implementation does not allow *lazy* initialization. Only ``const fn`` functions can be used to initialize the structure instance that should be wrapped by the ``Singleton``.
-
 ## License
 
 Licensed under Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0) or MIT ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)) at your choice.
