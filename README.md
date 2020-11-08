@@ -33,7 +33,7 @@ impl Demo {
         Demo {
             count: 0,
         }
-    };
+    }
 }
 ```
 

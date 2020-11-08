@@ -16,7 +16,8 @@
 //! to safely represent to unique existance of the peripheral.
 //!
 //! # Example
-//! ```
+//! ```no_run
+//! # use ruspiro_singleton::*;
 //! // define the static variable with an inizialization closure
 //! static FOO:Singleton<u32> = Singleton::new(20);
 //!
@@ -38,7 +39,7 @@
 //!         Demo {
 //!             count: 0,
 //!         }
-//!     };
+//!     }
 //! }
 //!
 //! fn main() {
@@ -99,7 +100,7 @@ impl<T: 'static> Singleton<T> {
     /// # Example
     /// ```no_run
     /// # use ruspiro_singleton::*;
-    /// static FOO: Singleton<String> = Singleton::lazy(&|| String::new("foo"));
+    /// static FOO: Singleton<String> = Singleton::lazy(&|| String::from("foo"));
     /// # fn main() {}
     /// ```
     pub const fn lazy<F>(init: &'static F) -> Self

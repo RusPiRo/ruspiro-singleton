@@ -45,7 +45,7 @@ args = ["xtest", "--target", "${BUILD_TARGET}", "--tests", "--features", "${FEAT
 [tasks.doctest]
 env = { FEATURES = "ruspiro_pi3" }
 command = "cargo"
-args = ["xtest", "--target", "${BUILD_TARGET}", "--doc", "--features", "${FEATURES}"]
+args = ["test", "--doc", "--features", "${FEATURES}"]
 
 [tasks.publish_dry]
 env = { FEATURES = "ruspiro_pi3" }
