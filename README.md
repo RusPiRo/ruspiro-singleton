@@ -39,6 +39,9 @@ impl Demo {
 
 The second variant allows to pass a closure to the initialization of the `Singleton` that will be evaluated at first access to the contents of it.
 
+> !HINT!
+> Safe lazy initialization is ensured using atomics. On the Raspberry Pi atmomic operations require the *MMU* to be configured and active. Otherwise the executing CPU core will hang when trying to execute the atomic operation.
+
 ```rust
 // define the static variable with an inizialization closure
 static DEMO:Singleton<Box<Demo>> = Singleton::lazy(&|| {

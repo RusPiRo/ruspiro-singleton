@@ -15,6 +15,10 @@
 //! structure used within the `Singleton` represents a peripheral where the crate shall only hand out a single instance
 //! to safely represent to unique existance of the peripheral.
 //!
+//! # HINT
+//! Safe lazy initialization is ensured using atomics. On the Raspberry Pi atmomic operations require the *MMU* to be 
+//! configured and active. Otherwise the executing CPU core will hang when trying to execute the atomic operation.
+//!
 //! # Example
 //! ```no_run
 //! # use ruspiro_singleton::*;

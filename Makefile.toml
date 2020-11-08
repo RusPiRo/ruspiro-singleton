@@ -39,7 +39,7 @@ args = ["doc", "--target", "${BUILD_TARGET}", "--features", "${FEATURES}", "--op
 [tasks.unittest]
 env = { FEATURES = "ruspiro_pi3" }
 command = "cargo"
-args = ["xtest", "--target", "${BUILD_TARGET}", "--tests", "--features", "${FEATURES}"]
+args = ["test", "--tests", "--features", "${FEATURES}"]
 
 
 [tasks.doctest]
