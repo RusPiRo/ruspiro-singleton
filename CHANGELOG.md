@@ -1,5 +1,11 @@
 # Changelog
 
+## :peach: v0.4.1
+
+- ### :detective: Fixes
+
+  - remove soundness when the interior type of the `Singleton` is not `Send` and not `Sync` like a Cell.
+
 ## :peach: v0.4.0
 
 - ### :bulb: Features
