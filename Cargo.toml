@@ -1,7 +1,7 @@
 [package]
 name = "ruspiro-singleton"
 authors = ["André Borrmann <pspwizard@gmx.de>"]
-version = "0.4.0" # remember to update html_root_url
+version = "0.4.1" # remember to update html_root_url
 description = "Simple and easy to use singleton pattern"
 license = "Apache-2.0"
 repository = "https://github.com/RusPiRo/ruspiro-singleton/tree/v||VERSION||"
@@ -21,7 +21,7 @@ maintenance = { status = "actively-developed" }
 [dev-dependencies]
 
 [dependencies]
-ruspiro-lock = "0.4.0"
+ruspiro-lock = "0.4.1"
 
 [features]
 ruspiro_pi3 = [ ]
