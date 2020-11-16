@@ -81,8 +81,10 @@ pub struct Singleton<T: 'static> {
 
 // The Singleton need to implement Send & Sync to ensure cross core compile check mechanics
 // this is safe as the inner RWLock ensures cross core safety
-unsafe impl<T> Sync for Singleton<T> {}
-unsafe impl<T> Send for Singleton<T> {}
+// but we need to be conditional on the inner type to prevent interior mutable types beeing used
+// inside a singleton
+unsafe impl<T> Sync for Singleton<T> where T: Sync {}
+unsafe impl<T> Send for Singleton<T> where T: Send {}
 
 impl<T: 'static> Singleton<T> {
     /// Create a new [Singleton] instance to be used in a static variable. Only ``const fn`` constructors are allowed
