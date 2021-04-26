@@ -7,7 +7,6 @@
 #![doc(html_root_url = "https://docs.rs/ruspiro-singleton/||VERSION||")]
 #![no_std]
 #![feature(const_fn)]
-#![cfg_attr(feature = "async", feature(future_poll_fn))]
 
 //! # Singleton pattern implementation
 //!

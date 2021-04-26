@@ -12,7 +12,7 @@ use core::cell::UnsafeCell;
 use ruspiro_lock::Spinlock;
 
 /// A wrapper that enables lazy initialization of the value stored within the `Singleton`
-pub struct LazyValue<T: 'static> {
+pub struct LazyValue<T: 'static + Sized> {
   /// the actual value that shall be provided as a singleton
   inner: UnsafeCell<Option<T>>,
   /// the closure used to initialize the singleton
@@ -21,7 +21,7 @@ pub struct LazyValue<T: 'static> {
   lock: Spinlock,
 }
 
-impl<T: 'static> LazyValue<T> {
+impl<T: 'static + Sized> LazyValue<T> {
   /// create a new [LazySingleton] where the value is already available
   pub const fn with_value(value: T) -> Self {
     Self {
@@ -35,7 +35,6 @@ impl<T: 'static> LazyValue<T> {
   pub const fn with_init<F>(init: &'static F) -> Self
   where
     F: Fn() -> T,
-    T: 'static,
   {
     Self {
       inner: UnsafeCell::new(None),
