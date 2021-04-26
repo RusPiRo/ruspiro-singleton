@@ -1,5 +1,14 @@
 # Changelog
 
+## :peach: v0.4.2
+
+This is a maintenance release migrating the build pipeline to github actions.
+
+- ### :wrench: Maintenance
+
+  - Migrate the build pipeline to github actions.
+  - Introduce custom build target for crate build.
+
 ## :peach: v0.4.1
 
 - ### :detective: Fixes

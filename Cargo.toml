@@ -1,7 +1,7 @@
 [package]
 name = "ruspiro-singleton"
 authors = ["André Borrmann <pspwizard@gmx.de>"]
-version = "0.4.1" # remember to update html_root_url
+version = "0.4.2" # remember to update html_root_url
 description = "Simple and easy to use singleton pattern"
 license = "Apache-2.0"
 repository = "https://github.com/RusPiRo/ruspiro-singleton/tree/v||VERSION||"
@@ -10,10 +10,9 @@ readme = "README.md"
 keywords = ["RusPiRo", "singleton", "raspberrypi"]
 categories = ["no-std", "embedded"]
 edition = "2018"
-exclude = [".travis.yml", "Makefile.toml"]
+exclude = ["Makefile.toml", ".cargo/config.toml"]
 
 [badges]
-travis-ci = { repository = "RusPiRo/ruspiro-singleton", branch = "master" }
 maintenance = { status = "actively-developed" }
 
 [lib]
@@ -21,10 +20,13 @@ maintenance = { status = "actively-developed" }
 [dev-dependencies]
 
 [dependencies]
-ruspiro-lock = "0.4.1"
+ruspiro-lock = "~0.4.2"
 
 [features]
-ruspiro_pi3 = [ ]
+
+[package.metadata.docs.rs]
+default-target = "aarch64-unknown-linux-gnu"
+features = [ "async" ]
 
 [patch.crates-io]
-ruspiro-lock = { git = "https://github.com/RusPiRo/ruspiro-lock.git" }
+ruspiro-lock = { git = "https://github.com/RusPiRo/ruspiro-lock.git", branch = "development" }
