@@ -26,7 +26,7 @@ ruspiro-lock = "~0.4.2"
 
 [package.metadata.docs.rs]
 default-target = "aarch64-unknown-linux-gnu"
-features = [ "async" ]
+features = [ ]
 
 [patch.crates-io]
 ruspiro-lock = { git = "https://github.com/RusPiRo/ruspiro-lock.git", branch = "development" }
