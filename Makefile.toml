@@ -7,68 +7,49 @@
 CC = "aarch64-none-elf-gcc"
 AR = "aarch64-none-elf-ar"
 CFLAGS = "-march=armv8-a -Wall -O3 -nostdlib -nostartfiles -ffreestanding -mtune=cortex-a53"
-RUSTFLAGS = "-C linker=${CC} -C target-cpu=cortex-a53 -C link-arg=-nostartfiles -C link-arg=-T./link64.ld"
-BUILD_TARGET = "aarch64-unknown-none"
+RUSTFLAGS = "-C linker=${CC} -C target-cpu=cortex-a53"
 
-# AARCH64 specific Travis CI env. variables. "aarch64-none-elf" is not available there as it seems
-[env.travis]
+# AARCH64 specific pipeline CI env. variables. "aarch64-none-elf" is not available there as it seems
+[env.pipeline]
 CC = "aarch64-linux-gnu-gcc"
 AR = "aarch64-linux-gnu-ar"
 CFLAGS = "-march=armv8-a -Wall -O3 -nostdlib -nostartfiles -ffreestanding -mtune=cortex-a53"
-RUSTFLAGS = "-C linker=${CC} -C target-cpu=cortex-a53 -C link-arg=-nostartfiles -C link-arg=-T./link64.ld"
-BUILD_TARGET = "aarch64-unknown-none"
+RUSTFLAGS = "-C linker=${CC} -C target-cpu=cortex-a53"
 
-[tasks.xbuild]
+[tasks.build]
 command = "cargo"
-args = ["build", "--target", "${BUILD_TARGET}", "--release", "--features", "${FEATURES}"]
+args = ["build", "--release", "--features", "${FEATURES}"]
 
 [tasks.pi3]
-env = { FEATURES = "ruspiro_pi3" }
-run_task = "xbuild"
+env = { FEATURES = "" }
+run_task = "build"
+dependencies = ["clean"]
 
 [tasks.clippy]
-env = { FEATURES = "ruspiro_pi3" }
+env = { FEATURES = "" }
 command = "cargo"
-args = ["clippy", "--target", "${BUILD_TARGET}", "--features", "${FEATURES}"]
+args = ["clippy", "--features", "${FEATURES}"]
 
 [tasks.doc]
-env = { FEATURES = "ruspiro_pi3" }
+env = { FEATURES = "" }
 command = "cargo"
-args = ["doc", "--target", "${BUILD_TARGET}", "--features", "${FEATURES}", "--open"]
-
-[tasks.unittest]
-env = { FEATURES = "ruspiro_pi3" }
-command = "cargo"
-args = ["test", "--tests", "--features", "${FEATURES}"]
-
+args = ["doc", "--target", "aarch64-unknown-linux-gnu", "--open", "--features", "${FEATURES}"]
 
 [tasks.doctest]
-env = { FEATURES = "ruspiro_pi3" }
+env = { FEATURES = "" }
 command = "cargo"
 args = ["test", "--doc", "--features", "${FEATURES}"]
-
-[tasks.publish_dry]
-env = { FEATURES = "ruspiro_pi3" }
-command = "cargo"
-args = ["publish", "--dry-run", "--target", "${BUILD_TARGET}", "--features", "${FEATURES}"]
-
-[tasks.publish]
-env = { FEATURES = "ruspiro_pi3" }
-command = "cargo"
-args = ["publish", "--token", "${CRATES_TOKEN}", "--allow-dirty", "--target", "${BUILD_TARGET}", "--features", "${FEATURES}"]
 
 [tasks.clean]
 command = "cargo"
 args = ["clean"]
 
-[tasks.qemu-test-objcopy]
-command = "aarch64-none-elf-objcopy"
-args = ["-O",  "binary",  "${CARGO_MAKE_TASK_ARGS}", "./target/kernel-test.img"]
+[tasks.publish_dry]
+env = { FEATURES = "" }
+command = "cargo"
+args = ["publish", "--dry-run", "--features", "${FEATURES}"]
 
-[tasks.qemu-test]
-script = [
-    "qemu-system-aarch64 -semihosting -display none -M raspi3 -kernel ./target/kernel-test.img -serial null -serial stdio -d int,mmu -D qemu-test.log"
-]
-dependencies = [
-    "qemu-test-objcopy"
-]
+[tasks.publish]
+env = { FEATURES = "" }
+command = "cargo"
+args = ["publish", "--token", "${CRATES_TOKEN}", "--allow-dirty", "--features", "${FEATURES}"]
