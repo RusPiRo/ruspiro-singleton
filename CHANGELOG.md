@@ -1,5 +1,14 @@
 # Changelog
 
+## :melon: v0.4.3
+
+This is a maintenance release ensuring successful build of the crate with the latest (2021-09-05) nightly compiler version.
+
+- ### :wrench: Maintenance
+
+  - introduce the new `#![feature(const_fn_trait_bound)]` as a replacement for the former more generic `const_fn` feature.
+  - build this crate with `aarch64-unknown-none` standard build target.
+
 ## :peach: v0.4.2
 
 This is a maintenance release migrating the build pipeline to github actions.
