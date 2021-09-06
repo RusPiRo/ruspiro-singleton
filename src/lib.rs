@@ -6,7 +6,7 @@
  **********************************************************************************************************************/
 #![doc(html_root_url = "https://docs.rs/ruspiro-singleton/||VERSION||")]
 #![no_std]
-#![feature(const_fn)]
+#![feature(const_fn_trait_bound)]
 
 //! # Singleton pattern implementation
 //!
